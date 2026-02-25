@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # run.sh — orchestrate collection + analysis with lockfile + atomic writes
-# Designed for XDG paths: config from ~/.config/claude-news/, data in ~/.local/share/claude-news/
+# Designed for XDG paths: config from ~/.config/herald/, data in ~/.local/share/herald/
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -8,8 +8,8 @@ PLUGIN_DIR="$(dirname "$SCRIPT_DIR")"
 DATE=$(date +%Y-%m-%d)
 
 # Resolve XDG paths
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/claude-news"
-DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/claude-news"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/herald"
+DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/herald"
 
 # Ensure directories exist
 mkdir -p "$DATA_DIR/data/state" "$DATA_DIR/data/raw" "$DATA_DIR/data/digests"

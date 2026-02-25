@@ -1,6 +1,6 @@
-"""Cross-platform scheduler for claude-news daily pipeline.
+"""Cross-platform scheduler for herald daily pipeline.
 
-macOS:  launchd plist at ~/Library/LaunchAgents/com.claude-news.plist
+macOS:  launchd plist at ~/Library/LaunchAgents/com.herald.plist
 Linux:  systemd user unit (timer + service), with cron fallback
 """
 from __future__ import annotations
@@ -12,10 +12,10 @@ import subprocess
 from pathlib import Path
 
 
-_LAUNCHD_LABEL = "com.claude-news"
-_SYSTEMD_SERVICE = "claude-news.service"
-_SYSTEMD_TIMER = "claude-news.timer"
-_CRON_MARKER = "# claude-news"
+_LAUNCHD_LABEL = "com.herald"
+_SYSTEMD_SERVICE = "herald.service"
+_SYSTEMD_TIMER = "herald.timer"
+_CRON_MARKER = "# herald"
 
 
 def _validate_time(time: str) -> tuple[int, int]:
@@ -90,9 +90,9 @@ def _launchd_plist_content(run_sh_path: str, time: str) -> str:
         <integer>{int(minute)}</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/tmp/claude-news-stdout.log</string>
+    <string>/tmp/herald-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/claude-news-stderr.log</string>
+    <string>/tmp/herald-stderr.log</string>
     <key>RunAtLoad</key>
     <false/>{env_section}
 </dict>
@@ -128,7 +128,7 @@ def _systemd_service_content(run_sh_path: str) -> str:
     env_lines = "\n".join(f"Environment={k}={v}" for k, v in xdg_env.items())
     env_section = f"\n{env_lines}" if env_lines else ""
     return f"""[Unit]
-Description=claude-news daily pipeline
+Description=herald daily pipeline
 
 [Service]
 Type=oneshot
@@ -138,7 +138,7 @@ ExecStart={run_sh_path}{env_section}
 
 def _systemd_timer_content(time: str) -> str:
     return f"""[Unit]
-Description=claude-news daily timer
+Description=herald daily timer
 
 [Timer]
 OnCalendar=*-*-* {time}:00

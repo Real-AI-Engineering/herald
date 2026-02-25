@@ -5,7 +5,7 @@ description: Daily curated news digest. Use when user asks about news, trends, w
 
 # News Digest
 
-You have access to a daily curated news digest via the claude-news plugin.
+You have access to a daily curated news digest via the herald plugin.
 
 ## When to use
 
@@ -15,7 +15,7 @@ You have access to a daily curated news digest via the claude-news plugin.
 
 ## How to check
 
-1. Look for today's digest: `~/.local/share/claude-news/data/digests/$(date +%Y-%m-%d).md`
+1. Look for today's digest: `~/.local/share/herald/data/digests/$(date +%Y-%m-%d).md`
 2. If not found, check yesterday's
 3. Read the digest and present relevant items
 

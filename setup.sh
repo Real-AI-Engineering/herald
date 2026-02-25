@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# setup.sh — claude-news plugin setup
+# setup.sh — herald plugin setup
 # Usage: bash setup.sh [--preset NAME] [--time HH:MM] [--no-schedule] [--blank]
 set -euo pipefail
 
@@ -21,7 +21,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo "=== claude-news setup ==="
+echo "=== herald setup ==="
 echo ""
 
 # --- Preflight checks ---
@@ -61,8 +61,8 @@ echo ""
 
 # --- Resolve XDG paths ---
 
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/claude-news"
-DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/claude-news"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/herald"
+DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/herald"
 VENV_DIR="$DATA_DIR/.venv"
 
 # --- Create venv ---
@@ -89,7 +89,7 @@ mkdir -p "$CONFIG_DIR"
 if [ ! -f "$CONFIG_DIR/config.yaml" ]; then
     if [ "$PRESET" = "blank" ]; then
         cat > "$CONFIG_DIR/config.yaml" <<'EOF'
-# claude-news config — blank preset
+# herald config — blank preset
 # Add your own feeds and keywords below.
 version: 1
 preset: "blank"
@@ -120,7 +120,7 @@ EOF
             exit 1
         fi
         cat > "$CONFIG_DIR/config.yaml" <<'ENDOFCONFIG'
-# claude-news config — customize by adding/removing feeds and keywords below.
+# herald config — customize by adding/removing feeds and keywords below.
 version: 1
 ENDOFCONFIG
         # Append user-chosen values safely (no shell expansion)

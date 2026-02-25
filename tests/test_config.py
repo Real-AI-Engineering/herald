@@ -165,7 +165,7 @@ def test_resolve_config_preset_only(tmp_path, monkeypatch):
 # ---------------------------------------------------------------------------
 
 def test_resolve_config_with_overlay(tmp_path, monkeypatch):
-    cfg_dir = tmp_path / "cfg" / "claude-news"
+    cfg_dir = tmp_path / "cfg" / "herald"
     cfg_dir.mkdir(parents=True)
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "cfg"))
 
@@ -197,7 +197,7 @@ def test_resolve_config_with_overlay(tmp_path, monkeypatch):
 # ---------------------------------------------------------------------------
 
 def test_resolve_config_rejects_path_traversal(tmp_path, monkeypatch):
-    cfg_dir = tmp_path / "cfg" / "claude-news"
+    cfg_dir = tmp_path / "cfg" / "herald"
     cfg_dir.mkdir(parents=True)
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "cfg"))
 
@@ -210,7 +210,7 @@ def test_resolve_config_rejects_path_traversal(tmp_path, monkeypatch):
 
 
 def test_resolve_config_blank(tmp_path, monkeypatch):
-    cfg_dir = tmp_path / "cfg" / "claude-news"
+    cfg_dir = tmp_path / "cfg" / "herald"
     cfg_dir.mkdir(parents=True)
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "cfg"))
 

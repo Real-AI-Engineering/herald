@@ -1,14 +1,14 @@
 ---
 name: news init
-description: Set up claude-news daily digest pipeline
+description: Set up herald daily digest pipeline
 allowed-tools: Bash, Read, Write
 ---
 
-You are setting up the claude-news daily news digest pipeline for the user.
+You are setting up the herald daily news digest pipeline for the user.
 
 ## Steps
 
-1. **Check if already set up**: Look for `~/.config/claude-news/config.yaml`. If it exists, tell the user setup is already done and offer to re-run or show status.
+1. **Check if already set up**: Look for `~/.config/herald/config.yaml`. If it exists, tell the user setup is already done and offer to re-run or show status.
 
 2. **Ask preferences** (if interactive):
    - Preset: "AI Engineering" (default) or blank (`--blank`) for custom
@@ -26,7 +26,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/setup.sh" --preset <preset> --time <HH:MM>
 bash "${CLAUDE_PLUGIN_ROOT}/pipeline/run.sh"
 ```
 
-5. **Show results**: Read `~/.local/share/claude-news/data/state/last_run.json` and report items collected and status.
+5. **Show results**: Read `~/.local/share/herald/data/state/last_run.json` and report items collected and status.
 
 6. **Show privacy notice**: "This plugin fetches RSS feeds and public APIs daily. All data stays local. No paid API keys required."
 

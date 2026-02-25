@@ -23,7 +23,7 @@ def test_detect_platform_unsupported():
 def test_launchd_plist_content():
     from pipeline.scheduler import _launchd_plist_content
     content = _launchd_plist_content("/path/to/run.sh", "06:00")
-    assert "com.claude-news" in content
+    assert "com.herald" in content
     assert "/path/to/run.sh" in content
     assert "<integer>6</integer>" in content
     assert "<integer>0</integer>" in content
@@ -47,10 +47,10 @@ def test_systemd_unit_content():
 def test_crontab_entry():
     from pipeline.scheduler import _crontab_entry
     entry = _crontab_entry("/path/to/run.sh", "06:00")
-    assert entry == "0 6 * * * /path/to/run.sh  # claude-news"
+    assert entry == "0 6 * * * /path/to/run.sh  # herald"
 
 
 def test_crontab_entry_custom_time():
     from pipeline.scheduler import _crontab_entry
     entry = _crontab_entry("/path/to/run.sh", "14:30")
-    assert entry == "30 14 * * * /path/to/run.sh  # claude-news"
+    assert entry == "30 14 * * * /path/to/run.sh  # herald"

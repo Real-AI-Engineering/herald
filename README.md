@@ -1,4 +1,4 @@
-# claude-news
+# Herald
 
 Daily curated news digest for your domain. One command to set up, zero API keys, works offline after first fetch.
 
@@ -7,7 +7,7 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that deli
 ## Install
 
 ```bash
-claude plugin add Real-AI-Engineering/claude-news
+claude plugin add Real-AI-Engineering/herald
 ```
 
 Then in Claude Code:
@@ -45,7 +45,7 @@ Daily: scheduler → run.sh → collect.py → analyze.py → digest.md
 
 ## Configuration
 
-Config lives at `~/.config/claude-news/config.yaml`. It layers your overrides on top of a preset:
+Config lives at `~/.config/herald/config.yaml`. It layers your overrides on top of a preset:
 
 ```yaml
 version: 1
@@ -105,8 +105,8 @@ Then add your own feeds and keywords in the config file.
 All data is local:
 
 ```
-~/.config/claude-news/          # config
-~/.local/share/claude-news/     # data + venv
+~/.config/herald/          # config
+~/.local/share/herald/     # data + venv
 ├── .venv/
 └── data/
     ├── raw/YYYY-MM-DD.jsonl    # raw items (90-day retention)
@@ -134,8 +134,8 @@ All data is local:
 
 ```
 /news stop
-rm -rf ~/.local/share/claude-news/
-rm -rf ~/.config/claude-news/
+rm -rf ~/.local/share/herald/
+rm -rf ~/.config/herald/
 ```
 
 ## License

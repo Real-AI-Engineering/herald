@@ -4,14 +4,14 @@ description: Disable the daily news scheduler and show cleanup options
 allowed-tools: Bash, Read
 ---
 
-You are disabling the claude-news daily scheduler.
+You are disabling the herald daily scheduler.
 
 ## Steps
 
 1. **Uninstall scheduler**:
 
 ```bash
-VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/claude-news/.venv"
+VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/herald/.venv"
 if [ -f "$VENV_DIR/bin/python" ]; then
     PYTHONPATH="${CLAUDE_PLUGIN_ROOT}" "$VENV_DIR/bin/python" -c "
 from pipeline.scheduler import uninstall_scheduler, get_scheduler_status
@@ -27,11 +27,11 @@ else
 fi
 ```
 
-2. **Confirm to user**: "Scheduler removed. Data preserved at ~/.local/share/claude-news/"
+2. **Confirm to user**: "Scheduler removed. Data preserved at ~/.local/share/herald/"
 
 3. **Show cleanup options**:
-   - "To delete all data: `rm -rf ~/.local/share/claude-news/`"
-   - "To delete config: `rm -rf ~/.config/claude-news/`"
+   - "To delete all data: `rm -rf ~/.local/share/herald/`"
+   - "To delete config: `rm -rf ~/.config/herald/`"
    - "To re-enable: run `/news init`"
 
 4. **Do NOT delete data or config automatically.** The user decides.

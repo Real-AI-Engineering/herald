@@ -1,24 +1,24 @@
-"""XDG-compliant path resolution for claude-news.
+"""XDG-compliant path resolution for herald.
 
-Config: ~/.config/claude-news/ (or $XDG_CONFIG_HOME/claude-news/)
-Data:   ~/.local/share/claude-news/ (or $XDG_DATA_HOME/claude-news/)
+Config: ~/.config/herald/ (or $XDG_CONFIG_HOME/herald/)
+Data:   ~/.local/share/herald/ (or $XDG_DATA_HOME/herald/)
 """
 from __future__ import annotations
 
 import os
 from pathlib import Path
 
-_APP = "claude-news"
+_APP = "herald"
 
 
 def config_dir() -> Path:
-    """Return config directory (~/.config/claude-news/ or XDG override)."""
+    """Return config directory (~/.config/herald/ or XDG override)."""
     base = os.environ.get("XDG_CONFIG_HOME") or str(Path.home() / ".config")
     return Path(base) / _APP
 
 
 def data_dir() -> Path:
-    """Return data directory (~/.local/share/claude-news/ or XDG override)."""
+    """Return data directory (~/.local/share/herald/ or XDG override)."""
     base = os.environ.get("XDG_DATA_HOME") or str(Path.home() / ".local" / "share")
     return Path(base) / _APP
 
