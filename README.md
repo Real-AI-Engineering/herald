@@ -138,6 +138,15 @@ rm -rf ~/.local/share/herald/
 rm -rf ~/.config/herald/
 ```
 
+## See Also
+
+Other [Real-AI-Engineering](https://github.com/Real-AI-Engineering) projects:
+
+- **[sigil](https://github.com/Real-AI-Engineering/sigil)** — risk-adaptive development pipeline with adversarial code review
+- **[teams-field-guide](https://github.com/Real-AI-Engineering/teams-field-guide)** — comprehensive guide to Claude Code multi-agent teams
+- **[codex-partner](https://github.com/Real-AI-Engineering/codex-partner)** — using Codex CLI as second AI alongside Claude Code
+- **[proofpack](https://github.com/Real-AI-Engineering/proofpack)** — proof-carrying CI gate for AI agent changes
+
 ## License
 
 MIT
