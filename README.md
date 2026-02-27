@@ -173,7 +173,7 @@ Other [heurema](https://github.com/heurema) projects:
 
 - **[sigil](https://github.com/heurema/sigil)** — risk-adaptive development pipeline with adversarial code review
 - **[teams-field-guide](https://github.com/heurema/teams-field-guide)** — comprehensive guide to Claude Code multi-agent teams
-- **[codex-partner](https://github.com/heurema/codex-partner)** — using Codex CLI as second AI alongside Claude Code
+- **[arbiter](https://github.com/heurema/arbiter)** — multi-AI orchestrator (Codex + Gemini)
 - **[proofpack](https://github.com/heurema/proofpack)** — proof-carrying CI gate for AI agent changes
 
 ## License
