@@ -8,7 +8,7 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that deli
 
 ```bash
 claude plugin marketplace add heurema/emporium
-claude plugin install herald
+claude plugin install herald@emporium
 ```
 
 Then in Claude Code:
