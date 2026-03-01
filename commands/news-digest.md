@@ -9,10 +9,25 @@ You are presenting the user's daily news digest from herald.
 ## Steps
 
 0. **Check for --demo flag**: If the user's message includes `--demo`:
-   - Check venv: `test -f "${CLAUDE_PLUGIN_ROOT}/pipeline/.venv/bin/python"`
-   - If no venv: "Herald is not set up yet. Run `/news init` first."
-   - Run: `cd "${CLAUDE_PLUGIN_ROOT}/pipeline" && .venv/bin/python -m pipeline.demo`
-   - Display the stdout output
+   - Determine venv path and python binary:
+     ```bash
+     HERALD_VENV="${XDG_DATA_HOME:-$HOME/.local/share}/herald/.venv"
+     HERALD_PYTHON="$HERALD_VENV/bin/python"
+     ```
+   - If venv exists (`test -f "$HERALD_PYTHON"`): use it for full demo (RSS + HN).
+   - If venv does NOT exist: attempt best-effort quick setup:
+     ```bash
+     python3 -m venv "$HERALD_VENV" 2>/dev/null && \
+       "$HERALD_PYTHON" -m pip install -q --timeout 15 -r "${CLAUDE_PLUGIN_ROOT}/pipeline/requirements.txt" 2>/dev/null
+     ```
+     - If quick setup succeeds: use `$HERALD_PYTHON` for full demo.
+     - If quick setup fails or times out: fall back to system `python3` (HN-only mode). After output, add note: "This is an HN-only preview. Run `/news init` for full RSS feeds (20+ sources)."
+   - Run demo:
+     ```bash
+     cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. "$HERALD_PYTHON" -m pipeline.demo 2>&1
+     ```
+     (Replace `$HERALD_PYTHON` with `python3` in fallback mode.)
+   - Display the stdout output.
    - STOP here — do not continue to remaining steps
 
 1. **Find latest digest**: Check these paths in order:
