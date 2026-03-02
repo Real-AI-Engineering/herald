@@ -175,7 +175,7 @@ rm -rf ~/.config/herald/
 
 Other [heurema](https://github.com/heurema) projects:
 
-- **[sigil](https://github.com/heurema/sigil)** — risk-adaptive development pipeline with adversarial code review
+- **[signum](https://github.com/heurema/signum)** — risk-adaptive development pipeline with adversarial code review
 - **[teams-field-guide](https://github.com/heurema/teams-field-guide)** — comprehensive guide to Claude Code multi-agent teams
 - **[arbiter](https://github.com/heurema/arbiter)** — multi-AI orchestrator (Codex + Gemini)
 - **[proofpack](https://github.com/heurema/proofpack)** — proof-carrying CI gate for AI agent changes
