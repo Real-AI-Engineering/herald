@@ -2,7 +2,7 @@
 
 ## Commands
 
-### `/news init [topic]`
+### `/news-init [topic]`
 
 Bootstraps Herald for the current environment. Creates `~/.config/herald/config.yaml` if it does not exist, installs the scheduler, and runs an immediate first fetch so a digest is available before the next scheduled run.
 
@@ -23,29 +23,29 @@ If `topic` is provided, that topic pack is loaded as the primary source set. If 
 
 **Examples**
 ```
-/news init
-/news init rust
-/news init security
+/news-init
+/news-init rust
+/news-init security
 ```
 
 ---
 
-### `/news add <url|topic>`
+### `/news-add <url|topic>`
 
 Adds a single RSS/Atom feed URL or an entire topic pack to the existing configuration. Does not restart the scheduler or run a fetch. The new source will be included in the next scheduled or manual run.
 
 **Examples**
 ```
-/news add https://blog.example.com/feed.xml
-/news add golang
-/news add https://simonwillison.net/atom/everything/
+/news-add https://blog.example.com/feed.xml
+/news-add golang
+/news-add https://simonwillison.net/atom/everything/
 ```
 
 **Note:** Adding a topic pack that is already partially configured merges the new feeds without duplicating existing ones.
 
 ---
 
-### `/news sources`
+### `/news-sources`
 
 Lists all configured feed sources with their topic group, tier weight, and the timestamp of the last successful fetch. Useful for verifying what will be included in the next digest.
 
@@ -62,7 +62,7 @@ ai-engineering (20 sources)
 
 ---
 
-### `/news digest`
+### `/news-digest`
 
 Reads and displays today's digest. If today's digest file does not yet exist (e.g., the scheduler has not run yet today), Herald runs an on-demand fetch before displaying results.
 
@@ -89,29 +89,29 @@ Herald Digest — 2026-03-01
 
 **Example**
 ```
-/news digest
+/news-digest
 ```
 
 ---
 
-### `/news run`
+### `/news-run`
 
 Triggers an immediate fetch-and-analyze cycle outside the normal schedule. Useful after adding new sources or when you want a mid-day refresh. Respects the lockfile — if a scheduled run is in progress, this command waits or exits cleanly.
 
 **Example**
 ```
-/news run
+/news-run
 ```
 
 ---
 
-### `/news stop`
+### `/news-stop`
 
-Uninstalls the scheduler (removes the launchd plist or systemd unit). Does not delete configuration or digest data. Run `/news init` again to re-enable scheduled fetching.
+Uninstalls the scheduler (removes the launchd plist or systemd unit). Does not delete configuration or digest data. Run `/news-init` again to re-enable scheduled fetching.
 
 **Example**
 ```
-/news stop
+/news-stop
 ```
 
 ---
@@ -199,19 +199,19 @@ The scoring formula uses a tier weight as the base score for each item:
 ## Troubleshooting
 
 **No digest appears after init**
-The first fetch runs synchronously during `/news init`. If it silently produced no items, check `~/.local/share/herald/herald.log` for errors. Common causes: network timeout, all feeds returned non-200, JSONL write permission issue.
+The first fetch runs synchronously during `/news-init`. If it silently produced no items, check `~/.local/share/herald/herald.log` for errors. Common causes: network timeout, all feeds returned non-200, JSONL write permission issue.
 
 **"herald.lock exists, another run in progress"**
 A previous run may have crashed without releasing the lock. If no fetch process is running (`ps aux | grep herald`), delete `/tmp/herald.lock` manually and retry.
 
 **Scheduler not running (macOS)**
-Verify the plist is loaded: `launchctl list | grep herald`. If absent, run `/news init` again. If present but not firing, check `~/Library/LaunchAgents/dev.skill7.herald.plist` for syntax errors with `plutil -lint`.
+Verify the plist is loaded: `launchctl list | grep herald`. If absent, run `/news-init` again. If present but not firing, check `~/Library/LaunchAgents/dev.skill7.herald.plist` for syntax errors with `plutil -lint`.
 
 **Scheduler not running (Linux)**
 Check the unit status: `systemctl --user status herald.timer`. If inactive, run `systemctl --user enable --now herald.timer`. If systemd is not available, verify the cron entry with `crontab -l`.
 
 **Digest is stale (yesterday's date)**
-The scheduler may not have fired. Run `/news run` for an immediate fetch. Check the log: `tail -50 ~/.local/share/herald/herald.log`.
+The scheduler may not have fired. Run `/news-run` for an immediate fetch. Check the log: `tail -50 ~/.local/share/herald/herald.log`.
 
 **Tavily results not appearing**
 Ensure `TAVILY_API_KEY` is set in the environment where Herald runs (the scheduler environment, not just your interactive shell). Add it to `~/.config/herald/config.yaml` under `tavily_api_key` as an alternative.

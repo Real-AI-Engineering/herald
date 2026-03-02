@@ -23,7 +23,7 @@ else:
     print('Scheduler removed.' if ok else 'Failed to remove scheduler.')
 "
 else
-    echo "ERROR: venv not found at $VENV_DIR. Run /news init first."
+    echo "ERROR: venv not found at $VENV_DIR. Run /news-init first."
 fi
 ```
 
@@ -32,6 +32,6 @@ fi
 3. **Show cleanup options**:
    - "To delete all data: `rm -rf ~/.local/share/herald/`"
    - "To delete config: `rm -rf ~/.config/herald/`"
-   - "To re-enable: run `/news init`"
+   - "To re-enable: run `/news-init`"
 
 4. **Do NOT delete data or config automatically.** The user decides.

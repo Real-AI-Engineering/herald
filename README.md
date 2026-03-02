@@ -18,7 +18,7 @@ claude plugin install herald@emporium
 Then in Claude Code:
 
 ```
-/news init
+/news-init
 ```
 
 This runs preflight checks, creates a Python venv, installs dependencies, copies the default config, and sets up a daily scheduler.
@@ -27,18 +27,18 @@ This runs preflight checks, creates a Python venv, installs dependencies, copies
 
 | Command | What it does |
 |---------|-------------|
-| `/news init` | Interactive setup wizard — pick preset, schedule time, verify |
-| `/news init <topic>` | Add a topic pack (e.g., `rust`, `devops`) to existing setup |
-| `/news add <url>` | Add any URL — auto-discovers RSS feed, suggests name and priority |
-| `/news add <topic>` | Add a built-in topic pack with feeds + keywords |
-| `/news sources` | View all active sources grouped by tier |
-| `/news sources remove <name>` | Remove a source (preset or custom) |
-| `/news sources restore <name>` | Restore a removed preset source |
-| `/news sources export` | Export full config as standalone YAML |
-| `/news sources import <path>` | Import sources from a shared config file |
-| `/news digest` | Read today's digest, grouped by topic |
-| `/news run` | Manually trigger collection + analysis |
-| `/news stop` | Disable scheduler, show cleanup options |
+| `/news-init` | Interactive setup wizard — pick preset, schedule time, verify |
+| `/news-init <topic>` | Add a topic pack (e.g., `rust`, `devops`) to existing setup |
+| `/news-add <url>` | Add any URL — auto-discovers RSS feed, suggests name and priority |
+| `/news-add <topic>` | Add a built-in topic pack with feeds + keywords |
+| `/news-sources` | View all active sources grouped by tier |
+| `/news-sources remove <name>` | Remove a source (preset or custom) |
+| `/news-sources restore <name>` | Restore a removed preset source |
+| `/news-sources export` | Export full config as standalone YAML |
+| `/news-sources import <path>` | Import sources from a shared config file |
+| `/news-digest` | Read today's digest, grouped by topic |
+| `/news-run` | Manually trigger collection + analysis |
+| `/news-stop` | Disable scheduler, show cleanup options |
 
 ## How It Works
 
@@ -61,9 +61,9 @@ Daily: scheduler → run.sh → collect.py → analyze.py → digest.md
 The fastest way to add sources — no YAML editing required:
 
 ```
-/news add https://simonwillison.net       # auto-discovers RSS feed
-/news add rust                            # adds Rust topic pack (3 feeds + keywords)
-/news init devops                         # adds DevOps topic pack to existing setup
+/news-add https://simonwillison.net       # auto-discovers RSS feed
+/news-add rust                            # adds Rust topic pack (3 feeds + keywords)
+/news-init devops                         # adds DevOps topic pack to existing setup
 ```
 
 Built-in topic packs: `rust`, `devops`, `golang`, `typescript`, `security`, `python`, `data`.
@@ -71,9 +71,9 @@ Built-in topic packs: `rust`, `devops`, `golang`, `typescript`, `security`, `pyt
 To manage existing sources:
 
 ```
-/news sources                             # see all active sources
-/news sources remove "r/MachineLearning"  # remove a source
-/news sources restore "r/MachineLearning" # restore a removed preset source
+/news-sources                             # see all active sources
+/news-sources remove "r/MachineLearning"  # remove a source
+/news-sources restore "r/MachineLearning" # restore a removed preset source
 ```
 
 ## Configuration
@@ -114,7 +114,7 @@ remove_keywords:
 Start from scratch with `--blank`:
 
 ```
-/news init --preset blank --time 08:00
+/news-init --preset blank --time 08:00
 ```
 
 Then add your own feeds and keywords in the config file.
@@ -166,7 +166,7 @@ All data is local:
 ## Uninstall
 
 ```
-/news stop
+/news-stop
 rm -rf ~/.local/share/herald/
 rm -rf ~/.config/herald/
 ```

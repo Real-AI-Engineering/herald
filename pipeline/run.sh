@@ -29,7 +29,7 @@ fi
 
 # Verify venv exists
 if [ ! -f "$VENV/bin/activate" ]; then
-    echo "$(date -Iseconds) ERROR: venv not found at $VENV. Run /news init first." >> "$LOG"
+    echo "$(date -Iseconds) ERROR: venv not found at $VENV. Run /news-init first." >> "$LOG"
     exit 1
 fi
 

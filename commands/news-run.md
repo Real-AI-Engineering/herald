@@ -8,7 +8,7 @@ You are manually triggering the herald pipeline.
 
 ## Steps
 
-1. **Check setup**: Verify `~/.local/share/herald/.venv/bin/activate` exists. If not, tell user to run `/news init` first.
+1. **Check setup**: Verify `~/.local/share/herald/.venv/bin/activate` exists. If not, tell user to run `/news-init` first.
 
 2. **Run pipeline**:
 
@@ -22,4 +22,4 @@ bash "${CLAUDE_PLUGIN_ROOT}/pipeline/run.sh"
    - Items collected
    - Status
 
-5. **Offer next step**: "Run /news digest to read the results."
+5. **Offer next step**: "Run /news-digest to read the results."

@@ -21,7 +21,7 @@ You are presenting the user's daily news digest from herald.
        "$HERALD_PYTHON" -m pip install -q --timeout 15 -r "${CLAUDE_PLUGIN_ROOT}/pipeline/requirements.txt" 2>/dev/null
      ```
      - If quick setup succeeds: use `$HERALD_PYTHON` for full demo.
-     - If quick setup fails or times out: fall back to system `python3` (HN-only mode). After output, add note: "This is an HN-only preview. Run `/news init` for full RSS feeds (20+ sources)."
+     - If quick setup fails or times out: fall back to system `python3` (HN-only mode). After output, add note: "This is an HN-only preview. Run `/news-init` for full RSS feeds (20+ sources)."
    - Run demo:
      ```bash
      cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. "$HERALD_PYTHON" -m pipeline.demo 2>&1
@@ -39,7 +39,7 @@ You are presenting the user's daily news digest from herald.
 3. **Show header**: "Last run: YYYY-MM-DD HH:MM (STATUS). Items: X kept from Y collected."
 
 4. **Handle edge cases**:
-   - No digest file exists: "No digest available. Run /news run or check /news init."
+   - No digest file exists: "No digest available. Run /news-run or check /news-init."
    - Digest exists but zero items: "No relevant items found today. Your filters may be too narrow. Edit ~/.config/herald/config.yaml to adjust."
    - last_run.json shows error: "Last run had errors. Check ~/.local/share/herald/data/state/collect.log"
 

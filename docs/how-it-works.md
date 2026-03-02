@@ -10,12 +10,12 @@ Herald is a six-command, one-skill, one-hook Claude Code plugin backed by a loca
 
 | Command | Role |
 |---------|------|
-| `/news init [topic]` | Bootstrap: write config, install scheduler, run first fetch |
-| `/news add <url\|topic>` | Add a feed URL or built-in topic pack to an existing config |
-| `/news sources` | List configured sources with their tier and last-fetch status |
-| `/news digest` | Read and display today's digest (fetches on-demand if not yet run) |
-| `/news run` | Trigger an immediate fetch-and-analyze cycle |
-| `/news stop` | Uninstall the scheduler; leave config and data intact |
+| `/news-init [topic]` | Bootstrap: write config, install scheduler, run first fetch |
+| `/news-add <url\|topic>` | Add a feed URL or built-in topic pack to an existing config |
+| `/news-sources` | List configured sources with their tier and last-fetch status |
+| `/news-digest` | Read and display today's digest (fetches on-demand if not yet run) |
+| `/news-run` | Trigger an immediate fetch-and-analyze cycle |
+| `/news-stop` | Uninstall the scheduler; leave config and data intact |
 
 ### Skill: `news-digest`
 
@@ -23,7 +23,7 @@ A Claude Code skill that activates automatically when the session context contai
 
 ### Hook: `SessionStart`
 
-Runs at the start of every Claude Code session. Checks whether a digest file exists for today's date. If one exists, prints a one-line reminder ("Herald digest ready — /news digest to read"). If none exists and the last fetch is more than 24 hours ago, prints a warning so the user knows to run `/news run`.
+Runs at the start of every Claude Code session. Checks whether a digest file exists for today's date. If one exists, prints a one-line reminder ("Herald digest ready — /news-digest to read"). If none exists and the last fetch is more than 24 hours ago, prints a warning so the user knows to run `/news-run`.
 
 ### Python Pipeline
 
@@ -94,7 +94,7 @@ Default schedule: daily at 07:00 local time. Configurable in `~/.config/herald/c
                              ┌──────────────────────┘
                              │
             [SessionStart hook] checks digest exists → reminder
-            [/news digest]       reads digest → formatted output
+            [/news-digest]       reads digest → formatted output
             [news-digest skill]  reads digest → inline in conversation
 ```
 
@@ -112,4 +112,4 @@ Default schedule: daily at 07:00 local time. Configurable in `~/.config/herald/c
 - Title similarity deduplication uses Jaccard on trigrams; very short titles (under 5 words) may not deduplicate reliably.
 - Scheduler setup requires write access to `~/Library/LaunchAgents` (macOS) or `~/.config/systemd/user/` (Linux).
 - Tavily results are supplemental; the digest is fully functional without them.
-- Offline operation after first fetch: `collect.py` requires network access; once a digest is written, `/news digest` reads it locally with no network required.
+- Offline operation after first fetch: `collect.py` requires network access; once a digest is written, `/news-digest` reads it locally with no network required.

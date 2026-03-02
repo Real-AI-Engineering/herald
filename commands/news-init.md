@@ -12,7 +12,7 @@ You are setting up the herald daily news digest pipeline for the user.
    - If it exists AND no topic argument was given: tell user setup is already done and offer to re-run or show status.
    - If it exists AND a topic argument was given: skip to step 1b (add topic to existing config).
 
-1b. **Add topic to existing config** (only when `/news init <topic>` is used with existing config):
+1b. **Add topic to existing config** (only when `/news-init <topic>` is used with existing config):
 
 @${CLAUDE_PLUGIN_ROOT}/lib/topic-catalog.md
 
@@ -23,8 +23,8 @@ You are setting up the herald daily news digest pipeline for the user.
      - Append feeds to `add_feeds` (skip duplicates by name or URL against both preset feeds and existing `add_feeds`)
      - Append keywords to `add_keywords` (create key if missing)
      - Write config via Edit tool
-     - Confirm: "Added <topic>: N feeds, M keywords. Run /news run to fetch from new sources."
-   - If NOT matched: "Unknown topic '<input>'. Available: rust, devops, golang, typescript, security, python, data. Or use /news add <url> for a custom source."
+     - Confirm: "Added <topic>: N feeds, M keywords. Run /news-run to fetch from new sources."
+   - If NOT matched: "Unknown topic '<input>'. Available: rust, devops, golang, typescript, security, python, data. Or use /news-add <url> for a custom source."
    - Return (do not run setup.sh again).
 
 2. **Ask preferences** (if interactive):
@@ -47,4 +47,4 @@ bash "${CLAUDE_PLUGIN_ROOT}/pipeline/run.sh"
 
 6. **Show privacy notice**: "This plugin fetches RSS feeds and public APIs daily. All data stays local. No paid API keys required."
 
-7. **Offer next step**: "Run /news digest to read today's digest."
+7. **Offer next step**: "Run /news-digest to read today's digest."

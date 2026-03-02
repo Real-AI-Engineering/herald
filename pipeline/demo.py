@@ -110,7 +110,7 @@ def run_demo(config: dict | None = None) -> str:
     )
 
     # Step 10: append footer
-    digest += "\n_Demo run — results not saved. Run `/news init` for daily scheduled digests._\n"
+    digest += "\n_Demo run — results not saved. Run `/news-init` for daily scheduled digests._\n"
 
     # Step 11: prepend no-keywords note after stats line (if keywords were empty)
     if not keywords:
@@ -121,7 +121,7 @@ def run_demo(config: dict | None = None) -> str:
                 insert_idx = i + 1
                 break
         if insert_idx is not None:
-            note = "\n> No topics configured — showing trending items. Run `/news init <topic>` for domain-specific results.\n"
+            note = "\n> No topics configured — showing trending items. Run `/news-init <topic>` for domain-specific results.\n"
             lines.insert(insert_idx, note)
             digest = "".join(lines)
 

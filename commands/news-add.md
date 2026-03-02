@@ -8,12 +8,12 @@ You are adding a news source to the user's herald config.
 
 ## Preflight
 
-1. Check that `~/.config/herald/config.yaml` exists. If not: "Run /news init first."
-2. Read config. If YAML parse fails: "Your config file has invalid YAML. Fix it manually or delete it and run /news init."
+1. Check that `~/.config/herald/config.yaml` exists. If not: "Run /news-init first."
+2. Read config. If YAML parse fails: "Your config file has invalid YAML. Fix it manually or delete it and run /news-init."
 
 ## Determine input type
 
-Parse the user's input after `/news add`:
+Parse the user's input after `/news-add`:
 - If it looks like a URL (starts with http/https or contains a dot with a path): → URL flow
 - If it matches a known topic from the catalog below: → Topic flow
 - If no argument: ask "Paste a URL or type a topic name (e.g., rust, devops, security)"
@@ -78,7 +78,7 @@ Parse the user's input after `/news add`:
 5. Check: if a feed with same name OR same URL already exists in preset feeds OR in `add_feeds` — tell user and stop. (Check both to avoid duplicates in the pipeline.)
 6. Append to `add_feeds` list. If `add_feeds` key doesn't exist yet, create it.
 7. Write the updated config via Edit tool (targeted append, not full rewrite).
-8. Confirm: "Added <name>. Run /news run to fetch articles from this source."
+8. Confirm: "Added <name>. Run /news-run to fetch articles from this source."
 
 ## Topic Flow
 
@@ -93,7 +93,7 @@ If input matches a topic name or alias from the catalog above:
 5. For each selected feed: check if name or URL already exists in preset feeds OR in `add_feeds` — skip duplicates silently and note them.
 6. Add to `add_keywords` (create key if missing) and `add_feeds` as selected.
 7. Write config via Edit tool.
-8. Confirm: "Added <topic>: N feeds, M keywords. Run /news run to see results."
+8. Confirm: "Added <topic>: N feeds, M keywords. Run /news-run to see results."
 
 If input does NOT match any topic: "Unknown topic '<input>'. Available: rust, devops, golang, typescript, security, python, data. Or paste a URL."
 

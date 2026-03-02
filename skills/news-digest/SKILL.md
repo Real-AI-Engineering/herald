@@ -21,7 +21,7 @@ You have access to a daily curated news digest via the herald plugin.
 
 ## Available commands
 
-- `/news init` — Set up the pipeline
-- `/news digest` — Read today's digest
-- `/news run` — Manually trigger collection
-- `/news stop` — Disable the scheduler
+- `/news-init` — Set up the pipeline
+- `/news-digest` — Read today's digest
+- `/news-run` — Manually trigger collection
+- `/news-stop` — Disable the scheduler
