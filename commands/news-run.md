@@ -1,5 +1,5 @@
 ---
-name: news run
+name: news-run
 description: Manually trigger herald news collection and analysis
 allowed-tools: Bash, Read
 ---

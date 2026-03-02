@@ -1,5 +1,5 @@
 ---
-name: news stop
+name: news-stop
 description: Disable the daily news scheduler and show cleanup options
 allowed-tools: Bash, Read
 ---

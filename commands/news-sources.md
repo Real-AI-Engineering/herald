@@ -1,5 +1,5 @@
 ---
-name: news sources
+name: news-sources
 description: View and manage your herald news sources and topics
 allowed-tools: Bash, Read, Write, Edit
 ---

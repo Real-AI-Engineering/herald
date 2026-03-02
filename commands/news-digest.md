@@ -1,5 +1,5 @@
 ---
-name: news digest
+name: news-digest
 description: Read today's curated news digest
 allowed-tools: Bash, Read
 ---

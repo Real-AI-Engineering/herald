@@ -1,5 +1,5 @@
 ---
-name: news init
+name: news-init
 description: Set up herald daily digest pipeline
 allowed-tools: Bash, Read, Write, Edit
 ---

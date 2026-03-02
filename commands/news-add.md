@@ -1,5 +1,5 @@
 ---
-name: news add
+name: news-add
 description: Add a news source (URL, domain, or topic) to your herald config
 allowed-tools: Bash, Read, Write, Edit
 ---
