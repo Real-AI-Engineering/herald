@@ -60,10 +60,20 @@ def run_demo(config: dict | None = None) -> str:
     deduped = dedup_items(items, dummy_seen)
 
     # Step 6: keyword filter (only if keywords configured)
+    try:
+        from pipeline.topics import parse_topic_config, match_topics
+        topic_groups = parse_topic_config(config.get("keywords", {}))
+        use_topics = True
+    except ImportError:
+        use_topics = False
+
     if keywords:
         filtered: list[dict] = []
         for item_obj in deduped:
-            topics = keyword_match(item_obj.title, keywords)
+            if use_topics:
+                topics = match_topics(item_obj.title, topic_groups)
+            else:
+                topics = keyword_match(item_obj.title, keywords)
             if not topics:
                 continue
             d = item_obj.to_dict()
@@ -100,7 +110,7 @@ def run_demo(config: dict | None = None) -> str:
         "kept": kept,
         "cost": 0.0,
     }
-    digest = generate_digest(final, date, stats)
+    digest = generate_digest(final, date, stats, source_weights=source_weights)
 
     # Replace title line with demo banner
     digest = digest.replace(
