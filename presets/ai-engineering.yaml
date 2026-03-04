@@ -6,7 +6,7 @@ feeds:
   - name: "HN Frontpage 100+"
     url: "https://hnrss.org/frontpage?points=100"
     tier: 1
-    weight: 0.25
+    weight: 0.40
     type: rss
 
   - name: "Simon Willison"
@@ -36,7 +36,7 @@ feeds:
   - name: "GitHub Trending Python"
     url: "https://mshibanami.github.io/GitHubTrendingRSS/daily/python.xml"
     tier: 1
-    weight: 0.20
+    weight: 0.35
     type: rss
 
   - name: "AINews by Latent Space"
