@@ -4,47 +4,45 @@ description: Set up herald daily digest pipeline
 allowed-tools: Bash, Read, Write, Edit
 ---
 
-You are setting up the herald daily news digest pipeline for the user.
+You are setting up the herald v2 daily news digest pipeline.
 
 ## Steps
 
-1. **Check if already set up**: Look for `~/.config/herald/config.yaml`.
-   - If it exists AND no topic argument was given: tell user setup is already done and offer to re-run or show status.
-   - If it exists AND a topic argument was given: skip to step 1b (add topic to existing config).
+1. **Check if already set up**: Look for `~/.herald/config.yaml`.
+   - If it exists: tell user setup is done, offer to show status (`/news-status`) or run pipeline (`/news-run`).
 
-1b. **Add topic to existing config** (only when `/news-init <topic>` is used with existing config):
-
-@${CLAUDE_PLUGIN_ROOT}/lib/topic-catalog.md
-
-   - Match the argument against the topic catalog above (use aliases for fuzzy matching: "k8s"→devops, "js"→typescript, "py"→python).
-   - If matched: show what will be added (feeds + keywords), ask user to confirm, then:
-     - Read `~/.config/herald/config.yaml`
-     - Resolve preset path via Bash: `echo "${CLAUDE_PLUGIN_ROOT}/presets"`, then Read the preset file.
-     - Append feeds to `add_feeds` (skip duplicates by name or URL against both preset feeds and existing `add_feeds`)
-     - Append keywords to `add_keywords` (create key if missing)
-     - Write config via Edit tool
-     - Confirm: "Added <topic>: N feeds, M keywords. Run /news-run to fetch from new sources."
-   - If NOT matched: "Unknown topic '<input>'. Available: rust, devops, golang, typescript, security, python, data. Or use /news-add <url> for a custom source."
-   - Return (do not run setup.sh again).
-
-2. **Ask preferences** (if interactive):
-   - Preset: "AI Engineering" (default) or blank (`--blank`) for custom
-   - Schedule time: default 06:00, or ask for preferred time
-
-3. **Run setup.sh**:
+2. **Run init**:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/setup.sh" --preset <preset> --time <HH:MM>
+cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. python3 -m herald.cli init
 ```
 
-4. **Run first collection** to verify everything works:
+3. **Configure sources**: Read `~/.herald/config.yaml` and help user add sources:
+   - Ask: "What topics do you follow? (e.g., AI, Rust, DevOps, security)"
+   - Based on answer, suggest sources with RSS feeds and HN integration
+   - Edit `~/.herald/config.yaml` to add sources using this format:
+     ```yaml
+     sources:
+       - id: hn
+         name: Hacker News
+         weight: 0.3
+         category: community
+       - id: simonw
+         name: Simon Willison
+         url: https://simonwillison.net/atom/everything/
+         weight: 0.2
+     ```
+   - For HN source, add `hn` adapter mapping (handled by pipeline)
+   - Optionally configure topics for keyword filtering
+
+4. **Run first collection**:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/pipeline/run.sh"
+cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. python3 -m herald.cli run
 ```
 
-5. **Show results**: Read `~/.local/share/herald/data/state/last_run.json` and report items collected and status.
+5. **Show results**: Report articles collected and stories created.
 
-6. **Show privacy notice**: "This plugin fetches RSS feeds and public APIs daily. All data stays local. No paid API keys required."
+6. **Privacy note**: "All data stays local in ~/.herald/. No paid API keys required. RSS feeds are fetched directly."
 
-7. **Offer next step**: "Run /news-digest to read today's digest."
+7. **Next step**: "Run `/news-digest` to read today's digest."

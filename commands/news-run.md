@@ -4,22 +4,22 @@ description: Manually trigger herald news collection and analysis
 allowed-tools: Bash, Read
 ---
 
-You are manually triggering the herald pipeline.
+You are manually triggering the herald v2 pipeline.
 
 ## Steps
 
-1. **Check setup**: Verify `~/.local/share/herald/.venv/bin/activate` exists. If not, tell user to run `/news-init` first.
+1. **Check setup**: Verify `~/.herald/config.yaml` exists. If not: "Run `/news-init` first."
 
 2. **Run pipeline**:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/pipeline/run.sh"
+cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. python3 -m herald.cli run
 ```
 
-3. **Show progress**: Read the tail of `~/.local/share/herald/data/state/collect.log` for the latest run output.
+3. **Show results**: Run status to see what was collected:
 
-4. **Show results**: Read `~/.local/share/herald/data/state/last_run.json` and report:
-   - Items collected
-   - Status
+```bash
+cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. python3 -m herald.cli status
+```
 
-5. **Offer next step**: "Run /news-digest to read the results."
+4. **Offer next step**: "Run `/news-digest` to read the results."

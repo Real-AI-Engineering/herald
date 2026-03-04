@@ -1,37 +1,20 @@
 ---
 name: news-stop
-description: Disable the daily news scheduler and show cleanup options
+description: Show cleanup options for herald data
 allowed-tools: Bash, Read
 ---
 
-You are disabling the herald daily scheduler.
+You are helping the user clean up herald data.
 
 ## Steps
 
-1. **Uninstall scheduler**:
-
+1. **Check status**:
 ```bash
-VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/herald/.venv"
-if [ -f "$VENV_DIR/bin/python" ]; then
-    PYTHONPATH="${CLAUDE_PLUGIN_ROOT}" "$VENV_DIR/bin/python" -c "
-from pipeline.scheduler import uninstall_scheduler, get_scheduler_status
-status = get_scheduler_status()
-if not status['installed']:
-    print('No scheduler found.')
-else:
-    ok = uninstall_scheduler()
-    print('Scheduler removed.' if ok else 'Failed to remove scheduler.')
-"
-else
-    echo "ERROR: venv not found at $VENV_DIR. Run /news-init first."
-fi
+cd "${CLAUDE_PLUGIN_ROOT}" && PYTHONPATH=. python3 -m herald.cli status 2>/dev/null
 ```
 
-2. **Confirm to user**: "Scheduler removed. Data preserved at ~/.local/share/herald/"
+2. **Show cleanup options**:
+   - "To delete all data and config: `rm -rf ~/.herald/`"
+   - "To re-initialize: run `/news-init`"
 
-3. **Show cleanup options**:
-   - "To delete all data: `rm -rf ~/.local/share/herald/`"
-   - "To delete config: `rm -rf ~/.config/herald/`"
-   - "To re-enable: run `/news-init`"
-
-4. **Do NOT delete data or config automatically.** The user decides.
+3. **Do NOT delete data automatically.** The user decides.
