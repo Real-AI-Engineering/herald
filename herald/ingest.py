@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from herald.db import Database
 from herald.models import RawItem, Source
 from herald.scoring import article_score_base
+from herald.topics import extract_topics
 from herald.ulid import generate_ulid
 from herald.url import canonicalize_url
 
@@ -34,11 +35,6 @@ def _detect_type(title: str) -> str:
         if any(kw in t for kw in keywords):
             return story_type
     return "news"
-
-
-def _extract_topics(title: str, topic_rules: dict[str, list[str]]) -> list[str]:
-    t = title.lower()
-    return [topic for topic, keywords in topic_rules.items() if any(kw.lower() in t for kw in keywords)]
 
 
 @dataclass
@@ -146,7 +142,7 @@ def ingest_items(
 
             # Assign topics
             if topic_rules:
-                topics = _extract_topics(item.title, topic_rules)
+                topics = extract_topics(item.title, topic_rules)
                 for topic in topics:
                     db.execute(
                         "INSERT OR IGNORE INTO article_topics (article_id, topic) VALUES (?, ?)",
