@@ -104,8 +104,9 @@ fi
 COLLECTED=$(wc -l < "$RAW_FILE" 2>/dev/null | tr -d ' ' || echo 0)
 DIGEST_FILE="$DATA_DIR/data/digests/$DATE.md"
 if [ -f "$DIGEST_FILE" ]; then
-    # Extract "Kept: N" from digest stats line
-    KEPT=$(grep -oP 'Kept: \K[0-9]+' "$DIGEST_FILE" 2>/dev/null || echo 0)
+    # Extract "Kept: N" from digest stats line (BSD grep compatible)
+    KEPT=$(sed -n 's/.*Kept: \([0-9]*\).*/\1/p' "$DIGEST_FILE" 2>/dev/null | head -1)
+    KEPT=${KEPT:-0}
 else
     KEPT=0
 fi

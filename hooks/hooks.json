@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'BRIEF_DIR=\"$HOME/.herald/briefs\"; if [ -d \"$BRIEF_DIR\" ]; then LATEST=$(ls -t \"$BRIEF_DIR\"/*.md 2>/dev/null | head -1); if [ -n \"$LATEST\" ]; then AGE=$(( $(date +%s) - $(stat -f %m \"$LATEST\" 2>/dev/null || stat -c %Y \"$LATEST\" 2>/dev/null || echo 0) )); if [ \"$AGE\" -lt 86400 ]; then echo \"Fresh news digest available. Run /news-digest to read.\"; fi; fi; fi'",
+            "command": "bash -c 'DIGEST=\"${XDG_DATA_HOME:-$HOME/.local/share}/herald/data/digests/$(date +%Y-%m-%d).md\"; if [ -f \"$DIGEST\" ]; then echo \"Fresh news digest available for today. Run /news-digest to read.\"; fi'",
             "timeout": 2
           }
         ]
