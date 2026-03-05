@@ -88,9 +88,9 @@ fi
 
 echo "[3/6] Installing dependencies..."
 if [ "$USE_UV" = true ]; then
-    uv pip install -q -r "$SCRIPT_DIR/pipeline/requirements.txt" --python "$VENV_DIR/bin/python"
+    uv pip install -q -r "$SCRIPT_DIR/src/pipeline/requirements.txt" --python "$VENV_DIR/bin/python"
 else
-    "$VENV_DIR/bin/pip" install -q -r "$SCRIPT_DIR/pipeline/requirements.txt"
+    "$VENV_DIR/bin/pip" install -q -r "$SCRIPT_DIR/src/pipeline/requirements.txt"
 fi
 echo "  Installed"
 
@@ -181,11 +181,11 @@ if [ "$NO_SCHEDULE" = true ]; then
     echo "[6/6] Scheduler skipped (--no-schedule)"
 else
     echo "[6/6] Installing scheduler ($SCHEDULE_TIME daily)..."
-    RUN_SH="$SCRIPT_DIR/pipeline/run.sh"
+    RUN_SH="$SCRIPT_DIR/src/pipeline/run.sh"
     chmod +x "$RUN_SH"
 
     CN_SCHEDULE_TIME="$SCHEDULE_TIME" CN_RUN_SH="$RUN_SH" \
-    PYTHONPATH="$SCRIPT_DIR" "$VENV_DIR/bin/python" -c "
+    PYTHONPATH="$SCRIPT_DIR/src" "$VENV_DIR/bin/python" -c "
 import os
 from pipeline.scheduler import install_scheduler
 ok = install_scheduler(os.environ['CN_SCHEDULE_TIME'], os.environ['CN_RUN_SH'])

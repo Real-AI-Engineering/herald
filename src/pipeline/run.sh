@@ -58,7 +58,7 @@ LASTRUN
 
 # Phase 1: Collect
 RAW_FILE="$DATA_DIR/data/raw/$DATE.jsonl"
-PYTHONPATH="$PLUGIN_DIR" python3 "$SCRIPT_DIR/collect.py" \
+PYTHONPATH="$PLUGIN_DIR/src" python3 "$SCRIPT_DIR/collect.py" \
     --config "$CONFIG_DIR/config.yaml" \
     --output "$RAW_FILE" \
     2> >(filter_log >> "$LOG") || {
@@ -88,7 +88,7 @@ print(f'Recovered {len(good)}/{len(valid)} lines')
 " "$RAW_FILE" >> "$LOG" 2>&1
     fi
 
-    PYTHONPATH="$PLUGIN_DIR" python3 "$SCRIPT_DIR/analyze.py" \
+    PYTHONPATH="$PLUGIN_DIR/src" python3 "$SCRIPT_DIR/analyze.py" \
         --config "$CONFIG_DIR/config.yaml" \
         --input "$RAW_FILE" \
         --output "$DATA_DIR/data/digests/$DATE.md" \
